@@ -1,27 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button,TextInput, ScrollView, FlatList,TouchableOpacity } from 'react-native';
 import React, {useState} from 'react'
+import Header from './components/header';
+import TodoItem from './components/todoItem';
 export default function App() {
-  const [people, setPeople]=useState([
-    {name:'Km Kalpana', key:'1'},
-    {name:'Kavya', key:'2'},
-    {name:'Krishi', key:'3'},
-    {name:'Km Kalpana', key:'4'},
-    {name:'Karishma', key:'5'},
-    {name:'Neetue', key:'6'},
-    {name:'Kdfd', key:'7'},
-    {name:'naming', key:'8'},
-    {name:'Daddy', key:'9'},
-  ]);
-  const pressHandler=(id)=>{
-      setPeople((prevPeople) =>{
-        return prevPeople.filter(person => person.id!= id)
-      });
-  }
+  const [todos, setTodos]=useState([
+    {text:"Buy Coffee", key:'1'},
+    {text:"Create an App", key:'2'},
+    {text:"Play on the Switch", key:'3'}
+  ])
   return (
     <View style={styles.container}>
-     <Text>Hello World</Text>
-     <Text>Kalpana Kathait</Text>
+      <Header />
+      <View style={styles.content}>
+      {/**To form */}
+      <View style={styles.list}>
+       <FlatList 
+         data={todos}
+         renderItem={({item})=>(
+          <TodoItem item={item}/>
+         )}
+       />
+      </View>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -31,9 +32,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop:24
+    paddingTop:40,
   },
+  content:{
+      padding:40,
 
+  },
+   list:{
+      marginTop:20,
+   }
 });
