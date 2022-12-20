@@ -6,13 +6,16 @@ import {
   Button,
   TextInput,
   ScrollView,
+  Keyboard,
   FlatList,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native'
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import Header from './components/header'
 import TodoItem from './components/todoItem'
 import AddTodo from './components/addTodo'
+import Sandbox from './components/sandbox'
 export default function App() {
   const [todos, setTodos] = useState([
     { text: 'Buy Coffee', key: '1' },
@@ -30,6 +33,10 @@ export default function App() {
     })
   }
   return (
+   // <Sandbox />
+    <TouchableWithoutFeedback onPress={()=>{
+      Keyboard.dismiss();
+    }}>
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
@@ -45,6 +52,7 @@ export default function App() {
       </View>
       <StatusBar style="auto" />
     </View>
+    </TouchableWithoutFeedback>
   )
 }
 
@@ -56,6 +64,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 40,
+    flex:1,
   },
   list: {
     marginTop: 20,
